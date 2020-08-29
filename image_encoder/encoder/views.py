@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
+from django.http import JsonResponse
 from .forms import ImageUploadForm
 from .models import Image
-import base64
+import hashlib, json, base64
 
 # Create your views here.
 def upload(request):
@@ -15,14 +16,18 @@ def upload(request):
             obj.save()
             imgid = obj.id
             return redirect('output', imgid)
-        print('not valid')
+        else:
+            print(form.errors)
     else:
         form = ImageUploadForm(request.POST)
     return render(request, 'encoder/index.html', {'form': form})
 
 def result(request, imgid):
-    image = Image.objects.get(id=imgid)
-    with open(image.image.url, "rb") as image_file:
+    img = Image.objects.get(id=imgid)
+    print(img.image)
+    with open(img.image.url, "rb") as image_file:
         encoded_string = base64.b64encode(image_file.read())
-    context = {'base64': encoded_string}
-    return render(request, 'encoder/output.html', context)
+    md5 = hashlib.md5(encoded_string)
+    context = {'base64': encoded_string.decode('utf-8'), 'md5_hash': md5.hexdigest()}
+    # context = json.dumps(context)
+    return JsonResponse(context, json_dumps_params={'indent': 4})
