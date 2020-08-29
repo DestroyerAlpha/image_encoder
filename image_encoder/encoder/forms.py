@@ -1,5 +1,4 @@
 from django import forms
-
 from .models import Image
 
 class ImageUploadForm(forms.ModelForm):
@@ -8,6 +7,3 @@ class ImageUploadForm(forms.ModelForm):
         fields = [
             'image'
         ]
-    # def __init__(self, *args, **kwargs):
-    #     super(ImageUploadForm, self).__init__(*args, **kwargs)
-    #     self.fields['image'].required = False
