@@ -34,6 +34,7 @@ def result(request, imgid):
     with open(img.image.url, "rb") as image_file:
         encoded_string = base64.b64encode(image_file.read())
     md5 = hashlib.md5(encoded_string)
+    img.delete()
     context = {'base64': encoded_string.decode('utf-8'), 'md5_hash': md5.hexdigest()}
     # context = json.dumps(context)
-    return JsonResponse(context, json_dumps_params={'indent': 4})
+    return JsonResponse(context, json_dumps_params={'indent': 2})
