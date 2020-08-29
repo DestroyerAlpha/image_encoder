@@ -8,6 +8,6 @@ class ImageUploadForm(forms.ModelForm):
         fields = [
             'image'
         ]
-    def __init__(self, *args, **kwargs):
-        super(ImageUploadForm, self).__init__(*args, **kwargs)
-        self.fields['image'].required = False
+    # def __init__(self, *args, **kwargs):
+    #     super(ImageUploadForm, self).__init__(*args, **kwargs)
+    #     self.fields['image'].required = False
