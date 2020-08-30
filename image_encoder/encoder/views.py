@@ -5,7 +5,7 @@ from .models import Image
 import hashlib, json, base64, os
 from django.core.exceptions import ValidationError
 from .encryption import encrypt
-from datetime import datetime
+
 
 def file_size(value): # add this to some file where you can import it from
     limit = 20 * 1024 * 1024
@@ -38,8 +38,8 @@ def result(request, imgid):
     md5 = hashlib.md5(encoded_string)
     img.delete()
     os.remove(img.image.url)
-    dateTimeObj = datetime.now()
-    dateTimeObj = str(dateTimeObj)
-    context = {'base64': encoded_string.decode('utf-8'), 'md5_hash': md5.hexdigest(), 'date-time':dateTimeObj}
+    ##Using MD5 Hexsum as the password for the datetime AES
+    aes = encrypt(md5.hexdigest())
+    context = {'base64': encoded_string.decode('utf-8'), 'md5_hash': md5.hexdigest(), 'aes':aes['cipher_text']}
     # context = json.dumps(context)
     return JsonResponse(context, json_dumps_params={'indent': 2})

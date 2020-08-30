@@ -3,13 +3,16 @@ import hashlib
 from Cryptodome.Cipher import AES
 import os
 from Cryptodome.Random import get_random_bytes
+from datetime import datetime
 
 #source: https://hackernoon.com/how-to-use-aes-256-cipher-python-cryptography-examples-6tbh37cr
 
-def encrypt(plain_text, password):
+def encrypt(password):
     # generate a random salt
     salt = get_random_bytes(AES.block_size)
-
+    #get request datetime
+    dateTimeObj = datetime.now()
+    plain_text = str(dateTimeObj)
     # use the Scrypt KDF to get a private key from the password
     private_key = hashlib.scrypt(
         password.encode(), salt=salt, n=2**14, r=8, p=1, dklen=32)
