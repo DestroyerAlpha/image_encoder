@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html class="no-js">
-
+{% load static %}
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Form</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="{% static 'encoder/style.css' %}">
+    <script type="text/javascript" src="{% static 'encoder/script.js' %}"></script>
 </head>
 
 <body>
-    <script src="" async defer></script>
     {% block content %}
     {% endblock content %}
 </body>

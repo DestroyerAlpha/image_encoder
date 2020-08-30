@@ -1,9 +1,30 @@
 {% extends "encoder/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <form enctype="multipart/form-data" method="post">{% csrf_token %}
-        {{ form|crispy }}
+    {% comment %} <form enctype="multipart/form-data" method="post">{% csrf_token %}
+        
         <button type="submit">Upload</button>
-    </form>
-    
+    </form> {% endcomment %}
+    <main class="main_full">
+        <div class="container">
+            <form enctype="multipart/form-data" method="post">{% csrf_token %}
+            <div class="panel">
+                <div class="button_outer">
+                    <div class="btn_upload">
+                        {{ form.image }} Add Image
+                    </div>
+                    <div class="processing_bar"></div>
+                    <div class="success_box"></div>
+                </div>
+                <br>
+                <button type="submit" class="button_outer">Upload</button>
+            </div>
+            
+            </form>
+            <div class="error_msg">{{ field.errors }}<br>{{ form.errors }}</div>
+            <div class="uploaded_file_view" id="uploaded_view">
+                <span class="file_remove">X</span>
+            </div>
+        </div>
+    </main>
 {% endblock content %}

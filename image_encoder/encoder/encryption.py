@@ -23,6 +23,8 @@ def encrypt(password):
     cipher = AES.new(key, mode, iv)
     key = b64encode(key).decode('utf-8')
     body = b64encode(cipher.encrypt(body)).decode('utf-8')
+    #The initialisation Vector
     iv = b64encode(iv).decode('utf-8')
-
+    
+    #Body contains the AES cipher text in base64 encoding
     return body
