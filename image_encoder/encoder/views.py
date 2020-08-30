@@ -4,6 +4,7 @@ from .forms import ImageUploadForm
 from .models import Image
 import hashlib, json, base64
 from django.core.exceptions import ValidationError
+import os
 
 def file_size(value): # add this to some file where you can import it from
     limit = 20 * 1024 * 1024
@@ -35,6 +36,7 @@ def result(request, imgid):
         encoded_string = base64.b64encode(image_file.read())
     md5 = hashlib.md5(encoded_string)
     img.delete()
+    os.remove(img.image.url)
     context = {'base64': encoded_string.decode('utf-8'), 'md5_hash': md5.hexdigest()}
     # context = json.dumps(context)
     return JsonResponse(context, json_dumps_params={'indent': 2})
