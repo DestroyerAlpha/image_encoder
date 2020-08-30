@@ -14,5 +14,5 @@ from django.core.exceptions import ValidationError
     #    raise ValidationError("Max size of file is %s MB" % limit_mb)
 
 class Image(models.Model):
-    image = models.ImageField(upload_to="./uploads/")
+    image = models.ImageField()
     # image = models.ImageField(upload_to="uploads/", validators=[validate_image])
