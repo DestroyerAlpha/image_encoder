@@ -123,4 +123,4 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = '/home/wicardobeth/image_encoder/image_encoder/uploads/'
 
-MEDIA_URL = '/uploads/'
+MEDIA_URL = '/home/wicardobeth/image_encoder/image_encoder/uploads/'
