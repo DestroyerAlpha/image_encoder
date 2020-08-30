@@ -121,6 +121,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = '/home/wicardobeth/image_encoder/'
+MEDIA_ROOT = '/home/wicardobeth/image_encoder/image_encoder/'
 
 MEDIA_URL = '/uploads/'
