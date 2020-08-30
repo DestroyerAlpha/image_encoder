@@ -7,6 +7,11 @@ Use the `requirements.txt` file to download the dependencies.
 Run the command below.
 `pip install -r requirements.txt`
 
+## How to use
+
+Click on `Add Image` and then click on `Upload`. If the file is an image in proper format, you will get a *JSON* response back.
+
+
 ## Deployment
 The app is currently deployed on PythonAnywhere. [It can be accessed by clicking this link](http://wicardobeth.pythonanywhere.com/)
 
