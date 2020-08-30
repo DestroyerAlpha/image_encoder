@@ -25,7 +25,7 @@ SECRET_KEY = '36d=b=(f^q5&j^50387@#%fgpa1z)=%giyu191q@wof&)(r1os'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['wicardobeth.pythonanywhere.com/']
+ALLOWED_HOSTS = ['*']
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # Application definition
