@@ -119,7 +119,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/home/wicardobeth/image_encoder/image_encoder/encoder/static/encoder/'
 
 MEDIA_ROOT = '/home/wicardobeth/image_encoder/image_encoder/uploads/'
 
