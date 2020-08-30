@@ -40,6 +40,6 @@ def result(request, imgid):
     os.remove(img.image.url)
     ##Using MD5 Hexsum as the password for the datetime AES
     aes = encrypt(md5.hexdigest())
-    context = {'base64': encoded_string.decode('utf-8'), 'md5_hash': md5.hexdigest(), 'aes':aes['cipher_text']}
+    context = {'base64': encoded_string.decode('utf-8'), 'md5_hash': md5.hexdigest(), 'aes':aes}
     # context = json.dumps(context)
     return JsonResponse(context, json_dumps_params={'indent': 2})

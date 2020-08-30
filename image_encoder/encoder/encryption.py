@@ -1,30 +1,28 @@
+from Crypto.Cipher import AES
+from Crypto.Util import Padding
+from hashlib import md5
 from base64 import b64encode, b64decode
-import hashlib
-from Cryptodome.Cipher import AES
-import os
-from Cryptodome.Random import get_random_bytes
 from datetime import datetime
 
-#source: https://hackernoon.com/how-to-use-aes-256-cipher-python-cryptography-examples-6tbh37cr
+#source: https://gist.github.com/Frizz925/ac0fb026314807959db5685ac149ed67
 
 def encrypt(password):
-    # generate a random salt
-    salt = get_random_bytes(AES.block_size)
-    #get request datetime
+    passphrase = password
+    #Get Current Date Time
     dateTimeObj = datetime.now()
-    plain_text = str(dateTimeObj)
-    # use the Scrypt KDF to get a private key from the password
-    private_key = hashlib.scrypt(
-        password.encode(), salt=salt, n=2**14, r=8, p=1, dklen=32)
+    content = str(dateTimeObj)
+    mode = AES.MODE_CBC
+    #Block Size
+    bs = AES.block_size
 
-    # create cipher config
-    cipher_config = AES.new(private_key, AES.MODE_GCM)
+    # encrypting
+    key = passphrase.encode('utf-8')
+    body = Padding.pad(content.encode('utf-8'), bs)
+    iv = key[8:bs+8]
 
-    # return a dictionary with the encrypted text
-    cipher_text, tag = cipher_config.encrypt_and_digest(bytes(plain_text, 'utf-8'))
-    return {
-        'cipher_text': b64encode(cipher_text).decode('utf-8'),
-        'salt': b64encode(salt).decode('utf-8'),
-        'nonce': b64encode(cipher_config.nonce).decode('utf-8'),
-        'tag': b64encode(tag).decode('utf-8')
-    }
+    cipher = AES.new(key, mode, iv)
+    key = b64encode(key).decode('utf-8')
+    body = b64encode(cipher.encrypt(body)).decode('utf-8')
+    iv = b64encode(iv).decode('utf-8')
+
+    return body
