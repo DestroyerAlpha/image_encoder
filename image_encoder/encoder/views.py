@@ -2,9 +2,10 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from .forms import ImageUploadForm
 from .models import Image
-import hashlib, json, base64
+import hashlib, json, base64, os
 from django.core.exceptions import ValidationError
-import os
+from .encryption import encrypt
+from datetime import datetime
 
 def file_size(value): # add this to some file where you can import it from
     limit = 20 * 1024 * 1024
@@ -37,6 +38,8 @@ def result(request, imgid):
     md5 = hashlib.md5(encoded_string)
     img.delete()
     os.remove(img.image.url)
-    context = {'base64': encoded_string.decode('utf-8'), 'md5_hash': md5.hexdigest()}
+    dateTimeObj = datetime.now()
+    dateTimeObj = str(dateTimeObj)
+    context = {'base64': encoded_string.decode('utf-8'), 'md5_hash': md5.hexdigest(), 'date-time':dateTimeObj}
     # context = json.dumps(context)
     return JsonResponse(context, json_dumps_params={'indent': 2})
